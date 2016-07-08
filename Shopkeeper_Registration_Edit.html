@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" href="../MahabazarViewPages/css/Shopkeeper_Registration_Edit.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).on('click', '#close-preview', function(){ 
+    $('.image-preview').popover('hide');
+    // Hover befor close the preview
+    $('.image-preview').hover(
+        function () {
+           $('.image-preview').popover('show');
+        }, 
+         function () {
+           $('.image-preview').popover('hide');
+        }
+    );    
+});
+
+$(function() {
+    // Create the close button
+    var closebtn = $('<button/>', {
+        type:"button",
+        text: 'x',
+        id: 'close-preview',
+        style: 'font-size: initial;',
+    });
+    closebtn.attr("class","close pull-right");
+    // Set the popover default content
+    $('.image-preview').popover({
+        trigger:'manual',
+        html:true,
+        title: "<strong>Preview</strong>"+$(closebtn)[0].outerHTML,
+        content: "There's no image",
+        placement:'bottom'
+    });
+    // Clear event
+    $('.image-preview-clear').click(function(){
+        $('.image-preview').attr("data-content","").popover('hide');
+        $('.image-preview-filename').val("");
+        $('.image-preview-clear').hide();
+        $('.image-preview-input input:file').val("");
+        $(".image-preview-input-title").text("Browse"); 
+    }); 
+    // Create the preview image
+    $(".image-preview-input input:file").change(function (){     
+        var img = $('<img/>', {
+            id: 'dynamic',
+            width:250,
+            height:200
+        });      
+        var file = this.files[0];
+        var reader = new FileReader();
+        // Set preview image into the popover data-content
+        reader.onload = function (e) {
+            $(".image-preview-input-title").text("Change");
+            $(".image-preview-clear").show();
+            $(".image-preview-filename").val(file.name);            
+            img.attr('src', e.target.result);
+            $(".image-preview").attr("data-content",$(img)[0].outerHTML).popover("show");
+        }        
+        reader.readAsDataURL(file);
+    });  
+});
+  </script>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+    <h1>Click the filter icon <small>(<i class="glyphicon glyphicon-filter"></i>)</small></h1>
+      <div class="row">
+      <div class="col-md-6">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title" id="Welcome">Welcome To Shopkeeper</h3>
+            <div class="pull-right">
+              <span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body">
+                <i class="glyphicon glyphicon-filter"></i>
+              </span>
+            </div>
+          </div>
+          <div class="panel-body">
+            <input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Filter Developers" />
+          </div>
+          <table class="table table-hover" id="dev-table">
+            <thead>
+              <tr>
+                <th>Select</th>
+                <th>Shop ID</th>
+                <th>Shop Name</th>
+                <th>Firm Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                 <label class="radio-inline">
+               <input name="radioGroup" id="radio1" value="option1" type="radio"> 1
+                </label>
+                </td>
+
+                <td>1FC34GR</td>
+                <td>Anu Kirana Store</td>
+                <td>kirana Store</td>
+              </tr>
+              <tr>
+                <td>
+                <label class="radio-inline">
+               <input name="radioGroup" id="radio1" value="option1" type="radio"> 2
+                </label>
+                </td>
+
+                <td>9HDGHS54</td>
+                <td>BihariLal Bajrang</td>
+                <td> Business</td>
+              </tr>
+             
+            </tbody>
+           
+
+          </table>
+
+        <div>
+           <!-- <div class="Add">Add</div>  -->
+          <!-- Add Pop Up Start -->
+          <button type="button" id="Add" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal1">View</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal1" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">View Page </h4>
+        </div>
+        <div class="modal-body">
+          <form role="form">
+               
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <label for="Shop_Id">Shop Id</label>
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Shop Id" readonly="">
+                    </div>
+                  </div>
+            
+
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <label for="Name">Shop Name</label>
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="text" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Shop Name" readonly="">
+                    </div>
+                  </div>
+
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <label for="Firm_Name">Firm Name</label>
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Firm Name" readonly="">
+                    </div>
+                  </div>
+               
+               <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <label for="Firm">Firm Registration Name</label>
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="text" name="Firm_Registration_Name" id="Firm_Registration_Name" class="form-control input-sm" placeholder="Firm Registration Name" readonly="">
+                    </div>
+                  </div>
+
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Firm Registration Copy</label>
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="text" name="Firm_Registration_Copy" id="Firm_Registration_Copy" class="form-control input-sm" placeholder="Firm Registration Copy" readonly="">
+                    </div>
+                  </div>
+
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <label for="Pan_Number">Pan Number</label>
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="text" name="Pan_Number" id="Pan_Number" class="form-control input-sm" placeholder="Pan Number" readonly="">
+                    </div>
+                  </div>
+
+                 <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <label for="Pan_Number_Copy">Pan Number Copy</label>
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="text" name="Pan_Number_Copy" id="Pan_Number_Copy" class="form-control input-sm" placeholder="Pan Number Copy" readonly="">
+                    </div>
+                  </div>
+                
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <label for="Tin_Number">Tin Number </label>
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="text" name="Tin_Number" id="Tin_Number" class="form-control input-sm" placeholder="Tin Number" readonly="">
+                    </div>
+                  </div>
+
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <label for="Tin_Number_Copy">Tin Number Copy</label>
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="text" name="Tin_Number_Copy" id="Tin_Number_Copy" class="form-control input-sm" placeholder="Tin Number Copy" readonly="">
+                    </div>
+                  </div>
+
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <label for="Shop_Add">Shop Add</label>
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="text" name="Shop_Add" id="Shop_Add" class="form-control input-sm" placeholder="Shop Add" readonly="">
+                    </div>
+                  </div>
+
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <label for="Mobile_Number">Mobile Number</label>
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="text" name="Mobile_Number" id="Mobile_Number" class="form-control input-sm" placeholder="Mobile Number" readonly="">
+                    </div>
+                  </div>
+
+               
+              
+              </form>
+          
+</div>
+       
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div> 
+  </div>
+   
+          <!-- Add Pop Up End -->
+
+          <!-- Add Pop Up End -->
+           <!-- <div class="View">Add</div> -->
+           <button type="button" id="Add" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add Page </h4>
+        </div>
+        <div class="modal-body">
+          <form role="form">
+
+          <!-- upload Image Start -->
+
+           <div class="col-xs-12">
+            <div class="input-group image-preview">
+                <input type="text" class="form-control image-preview-filename" disabled="disabled"> <!-- don't give a name === doesn't send on POST/GET -->
+                <span class="input-group-btn">
+                    <!-- image-preview-clear button -->
+                    <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+                        <span class="glyphicon glyphicon-remove"></span> Clear
+                    </button>
+                    <!-- image-preview-input -->
+                    <div class="btn btn-default image-preview-input">
+                        <span class="glyphicon glyphicon-folder-open"></span>
+                        <span class="image-preview-input-title">Browse</span>
+                        <input type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/> <!-- rename it -->
+                    </div>
+                </span>
+            </div>
+        </div><br><br>
+    
+
+
+          <!-- upload Image Start -->
+               
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <label for="Shop_Id">Shop Id</label>
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="text" name="Shop_Id" id="Shop_Id" class="form-control input-sm" placeholder="Shop Id">
+                    </div>
+                  </div>
+
+
+
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <label for="">Shop Name</label>
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="text" name="Shop_Name" id="Shop Name" class="form-control input-sm" placeholder="Shop Name">
+                    </div>
+                  </div>
+
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <label for="Firm_Name">Firm Name</label>
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="text" name="Firm_Name" id="Firm_Name" class="form-control input-sm" placeholder="Firm Name">
+                    </div>
+                  </div>
+               
+               <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <label for="Firm_Registration_Name">Firm Registration Name</label>
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="text" name="Firm_Registration_Name" id="Firm_Registration_Name" class="form-control input-sm" placeholder="Firm Registration Name">
+                    </div>
+                  </div>
+
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <label for="Firm_Registration_Copy">Firm Registration Copy</label>
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="text" name="Firm_Registration_Copy" id="Firm_Registration_Copy" class="form-control input-sm" placeholder="Firm Registration Copy">
+                    </div>
+                  </div>
+
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <label for="Pan_Number">Pan Number</label>
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="text" name="Pan Number" id="Pan Number" class="form-control input-sm" placeholder="Pan_Number">
+                    </div>
+                  </div>
+
+                 <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <label for="Pan_Number_Copy">Pan Number Copy</label>
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="text" name="Pan_Number_Copy" id="Pan_Number_Copy" class="form-control input-sm" placeholder="Pan Number Copy">
+                    </div>
+                  </div>
+                
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <label for="Tin Number">Tin Number </label>
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="text" name="Tin_Number" id="Tin_Number" class="form-control input-sm" placeholder="Tin Number">
+                    </div>
+                  </div>
+
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <label for="">Tin Number Copy</label>
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="text" name="Tin_Number_Copy" id="Tin_Number_Copy" class="form-control input-sm" placeholder="Tin Number Copy">
+                    </div>
+                  </div>
+
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <label for="Shop_Add">Shop Add</label>
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="text" name="Shop_Add" id="Shop_Add" class="form-control input-sm" placeholder="Shop Add">
+                    </div>
+                  </div>
+
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <label for="Mobile_Number">Mobile Number</label>
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="text" name="Mobile_Number" id="Mobile_Number" class="form-control input-sm" placeholder="Mobile Number">
+                    </div>
+                  </div>
+
+              
+              </form>
+          
+</div>
+       
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div> 
+  </div>
+   
+           <!-- Add Pop Up End -->
+
+           <div class="Delete">Delete</div>
+        </div>
+
+        </div>
+      </div>
+    
+</body>
+</html>
