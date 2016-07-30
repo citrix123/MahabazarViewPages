@@ -466,7 +466,37 @@ $(function() {
 
         </div>
         <div class="tab-pane" id="tab2">
-        	<p>Data 2.</p>
+        	
+          <label class="radio-inline">
+              <input name="radioGroup" id="radio1" value="option1" type="radio"> <b>Upload Via File</b>
+         
+           <!-- file upload image  start-->
+	          <div class="col-xs-offset-3 col-xs-7">
+            <div class="input-group image-preview">
+                <input type="text" class="form-control image-preview-filename" disabled="disabled"> <!-- don't give a name === doesn't send on POST/GET -->
+                <span class="input-group-btn">
+                    <!-- image-preview-clear button -->
+                    <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+                        <span class="glyphicon glyphicon-remove"></span> Clear
+                    </button>
+                    <!-- image-preview-input -->
+                    <div class="btn btn-default image-preview-input">
+                        <span class="glyphicon glyphicon-folder-open"></span>
+                        <span class="image-preview-input-title">Browse</span>
+                        <input type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview" multiple/> <!-- rename it -->
+                    </div>
+                </span>
+            </div>
+        </div>  </label>
+        <!-- file upload image  End-->
+        Note- CSV, XLS Files Accepted
+    
+
+
+
+              
+        
+
         </div>
         </div>
         </div>
